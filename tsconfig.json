@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "target": "esnext",
+    "outDir": "dist/esnextdir",
+    "types": [
+      "node",
+      "video.js"
+    ],
+    "jsx": "react",
+    "skipLibCheck": true,
+    "lib": [
+      "es2015",
+      "dom",
+      "webworker"
+    ],
+    "baseUrl": ".",
+    "allowJs": true,
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.tsx",
+    "**/*.wasm"
+  ]
+}
