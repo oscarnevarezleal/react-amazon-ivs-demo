@@ -8,9 +8,12 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     devtool: 'cheap-source-map',
-    entry: [`./src/index.tsx`],
+    entry: {
+        index: `./src/index.tsx`,
+        video: `./src/video.ts`,
+    },
     resolve: {
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     output: {
         path: __dirname + '/dist',
@@ -20,31 +23,31 @@ module.exports = {
         disableHostCheck: true,
         compress: false,
         contentBase: [
-            path.resolve(__dirname, 'bundle'),
+            path.resolve(__dirname, 'public'),
             path.resolve(__dirname, 'dist')
         ],
         index: 'index.html',
     },
     module: {
         rules: [{
-                // This loader compiles the local demo files and not the IVS assets themselves.
-                test: /\.ts$/,
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['@babel/preset-env', {
-                            loose: true,
-                            modules: 'auto',
-                        }],
-                        [
-                            '@babel/preset-typescript',
-                        ],
+            // This loader compiles the local demo files and not the IVS assets themselves.
+            test: /\.ts$/,
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    ['@babel/preset-env', {
+                        loose: true,
+                        modules: 'auto',
+                    }],
+                    [
+                        '@babel/preset-typescript',
                     ],
-                    plugins: [
-                        "@babel/plugin-proposal-class-properties",
-                    ]
-                }
-            },
+                ],
+                plugins: [
+                    "@babel/plugin-proposal-class-properties",
+                ]
+            }
+        },
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
@@ -52,6 +55,10 @@ module.exports = {
             {
                 test: /\.(svg)$/,
                 loader: 'raw-loader',
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.(scss)$/,
@@ -65,7 +72,7 @@ module.exports = {
                 }, {
                     loader: 'postcss-loader',
                     options: {
-                        plugins: function() {
+                        plugins: function () {
                             return [
                                 require('precss'),
                                 require('autoprefixer')
