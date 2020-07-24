@@ -232,7 +232,7 @@ export default class PlayerDemoComponent extends Component<PlayerDemoProps, Play
             <div>{this.props.title}</div>
             <div className="demo">
                 <div className="video-container">
-                    <form className="src-container-direct">
+                    <form className="src-container-direct" style={{display: 'none'}}>
                         <input className="src-input" placeholder="Enter IVS .m3u8"/>
                         <button className="src-submit" type="submit">Load</button>
                     </form>
@@ -241,6 +241,7 @@ export default class PlayerDemoComponent extends Component<PlayerDemoProps, Play
                 </div>
                 {this.state.currentQuestion &&
                 this.state.showQuestion && <QuestionDialog isOpen={true}
+                                                           title={'New question'}
                                                            onSkip={this.onCloseDialog.bind(this)}
                                                            question={this.state.currentQuestion}/>}
             </div>

@@ -3,6 +3,7 @@ import * as React from "react";
 import {Button, Classes, Dialog, Tooltip} from "@blueprintjs/core";
 import {Radio, RadioGroup} from "@blueprintjs/core";
 import {TextMetadataCue} from "amazon-ivs-player";
+import {Callout, Code, H5, Intent, Switch} from "@blueprintjs/core";
 
 export interface IQuestionDialogState {
 
@@ -26,6 +27,7 @@ export interface QuestionDialogProps {
     canOutsideClickClose?: boolean;
     enforceFocus?: boolean;
     isOpen: boolean;
+    title: string,
     usePortal?: boolean;
 }
 
@@ -41,7 +43,6 @@ export default class QuestionDialog extends React.PureComponent<QuestionDialogPr
     public render() {
         return (
             <Dialog
-                icon="info-sign"
                 {...this.state}
                 {...this.props}
             >
@@ -49,9 +50,11 @@ export default class QuestionDialog extends React.PureComponent<QuestionDialogPr
                     {this.props.question &&
                     <div>
                         <span className={'bp3-text-large'}>{this.props.question.question}</span>
+                        <br/>
+                        <br/>
                         <RadioGroup
                             onChange={e => console.log('Answer was provided', e)}
-                            label="Your choice">
+                            label="Please provide your answer">
                             {this.props.question.answers.map((a: string, index: number) => <Radio label={a}
                                                                                                   value={index}/>)}
                         </RadioGroup>
